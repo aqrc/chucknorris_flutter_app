@@ -1,13 +1,15 @@
-import 'package:chucknorris/main_widget_model.dart';
+import 'package:chucknorris/ui/main/main_widget_model.dart';
 import 'package:chucknorris/network/chucknorris_client.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'ui/main/main_page.dart';
+
 void main() {
   runApp(
     MultiProvider(
-      child: const MyApp(),
+      child: const App(),
       providers: [
         Provider<Dio>(create: (_) => Dio()),
         Provider<ChuckNorrisClient>(
@@ -22,8 +24,8 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,34 +34,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Chuck Norris Jokes'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              context.watch<MainWidgetModel>().joke,
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => context.read<MainWidgetModel>().updateJoke(),
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      home: const MainPage(),
     );
   }
 }
