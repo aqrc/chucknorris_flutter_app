@@ -1,7 +1,25 @@
+import 'package:chucknorris/main_widget_model.dart';
+import 'package:chucknorris/network/chucknorris_client.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      child: const MyApp(),
+      providers: [
+        Provider<Dio>(create: (_) => Dio()),
+        Provider<ChuckNorrisClient>(
+          create: (context) => ChuckNorrisClient(context.read<Dio>()),
+        ),
+        ChangeNotifierProvider<MainWidgetModel>(
+          create: (context) =>
+              MainWidgetModel(context.read<ChuckNorrisClient>()),
+        )
+      ],
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -10,55 +28,35 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Chuck Norris Jokes',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Chuck Norris Jokes'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
             Text(
-              '$_counter',
+              context.watch<MainWidgetModel>().joke,
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () => context.read<MainWidgetModel>().updateJoke(),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
