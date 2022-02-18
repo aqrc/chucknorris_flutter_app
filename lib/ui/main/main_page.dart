@@ -1,6 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'component/badged_fab.dart';
 import 'main_widget_model.dart';
 
 class MainPage extends StatelessWidget {
@@ -9,25 +11,22 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Chuck Norris Jokes'),
-      // ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              context.watch<MainWidgetModel>().joke,
-              style: Theme.of(context).textTheme.headline4,
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          child: GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () => context.read<MainWidgetModel>().updateJoke(),
+            child: Center(
+              child: AutoSizeText(
+                context.watch<MainWidgetModel>().joke,
+                style: Theme.of(context).textTheme.headline4,
+              ),
             ),
-          ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => context.read<MainWidgetModel>().updateJoke(),
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: const BadgedFab(),
     );
   }
 }
