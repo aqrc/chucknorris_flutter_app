@@ -1,9 +1,10 @@
-import 'package:chucknorris/ui/main/main_widget_model.dart';
+import 'package:chucknorris/ui/main/main_wm.dart';
 import 'package:chucknorris/network/chucknorris_client.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'ui/main/component/categories_wm.dart';
 import 'ui/main/main_page.dart';
 
 void main() {
@@ -15,9 +16,15 @@ void main() {
         Provider<ChuckNorrisClient>(
           create: (context) => ChuckNorrisClient(context.read<Dio>()),
         ),
-        ChangeNotifierProvider<MainWidgetModel>(
+        ChangeNotifierProvider<CategoriesWidgetModel>(
           create: (context) =>
-              MainWidgetModel(context.read<ChuckNorrisClient>()),
+              CategoriesWidgetModel(context.read<ChuckNorrisClient>()),
+        ),
+        ChangeNotifierProvider<MainWidgetModel>(
+          create: (context) => MainWidgetModel(
+            context.read<ChuckNorrisClient>(),
+            context.read<CategoriesWidgetModel>(),
+          ),
         )
       ],
     ),

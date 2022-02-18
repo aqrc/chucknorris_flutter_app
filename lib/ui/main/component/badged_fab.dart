@@ -2,8 +2,8 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../main_widget_model.dart';
 import 'bottom_sheet_container.dart';
+import 'categories_wm.dart';
 
 class BadgedFab extends StatelessWidget {
   const BadgedFab({
@@ -16,7 +16,7 @@ class BadgedFab extends StatelessWidget {
       badgeColor: Colors.white,
       position: BadgePosition.topEnd(top: -5, end: -5),
       badgeContent: Text(
-          context.watch<MainWidgetModel>().selectedCategoriesCount.toString()),
+          context.watch<CategoriesWidgetModel>().selectedCategoriesCount.toString()),
       child: FloatingActionButton(
         onPressed: () => showModalBottomSheet(
           shape: const RoundedRectangleBorder(

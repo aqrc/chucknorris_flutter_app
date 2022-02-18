@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../main_widget_model.dart';
+import 'categories_wm.dart';
 
 class BottomSheetContainer extends StatelessWidget {
   const BottomSheetContainer({
@@ -10,7 +10,7 @@ class BottomSheetContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var categories = context.watch<MainWidgetModel>().categories;
+    var categories = context.watch<CategoriesWidgetModel>().categories;
     if (categories.isEmpty) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -19,7 +19,7 @@ class BottomSheetContainer extends StatelessWidget {
         .map((e) => FilterChip(
               selected: e.value,
               onSelected: (bool value) =>
-                  context.read<MainWidgetModel>().toggleCategory(e.key),
+                  context.read<CategoriesWidgetModel>().toggleCategory(e.key),
               label: Text(e.key),
             ))
         .toList();
