@@ -19,7 +19,7 @@ class MainPage extends StatelessWidget {
             onTap: () => context.read<MainWidgetModel>().updateJoke(),
             child: Center(
               child: AutoSizeText(
-                context.watch<MainWidgetModel>().joke,
+                context.watch<MainWidgetModel>().joke?.value ?? "Loading...",
                 style: Theme.of(context).textTheme.headline4,
               ),
             ),
