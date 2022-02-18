@@ -12,11 +12,17 @@ class BadgedFab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var selectedCategoriesCount =
+        context.watch<CategoriesWidgetModel>().selectedCategoriesCount;
+
+    var badgeContent = selectedCategoriesCount == 0
+        ? "All"
+        : selectedCategoriesCount.toString();
+
     return Badge(
       badgeColor: Colors.white,
       position: BadgePosition.topEnd(top: -5, end: -5),
-      badgeContent: Text(
-          context.watch<CategoriesWidgetModel>().selectedCategoriesCount.toString()),
+      badgeContent: Text(badgeContent),
       child: FloatingActionButton(
         onPressed: () => showModalBottomSheet(
           shape: const RoundedRectangleBorder(
