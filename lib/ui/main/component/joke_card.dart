@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:chucknorris/network/model/joke.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../main_wm.dart';
 
@@ -56,9 +57,28 @@ class TopRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: joke.categories.isEmpty
-          ? [const Chip(label: Text("uncategorized"))]
-          : joke.categories.map((e) => Chip(label: Text(e))).toList(),
+      children: [
+        ...(joke.categories.isEmpty
+            ? [const Chip(label: Text("uncategorized"))]
+            : joke.categories.map((e) => Chip(label: Text(e))).toList()),
+        Expanded(
+          child: Align(
+            alignment: Alignment.topRight,
+            child: IconButton(
+              onPressed: () => _launchURL(joke.url),
+              icon: const Icon(Icons.open_in_browser),
+            ),
+          ),
+        )
+      ],
     );
+  }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

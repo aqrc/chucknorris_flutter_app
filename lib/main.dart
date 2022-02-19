@@ -44,6 +44,9 @@ class App extends StatelessWidget {
           secondaryColor: Colors.blue,
           labelStyle: const TextStyle(),
         ),
+        iconTheme: const IconThemeData(
+          color: Colors.blue,
+        ),
         primarySwatch: Colors.blue,
       ),
       home: const MainPage(),
