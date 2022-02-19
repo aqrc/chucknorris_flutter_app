@@ -17,7 +17,9 @@ class JokeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var joke = context.watch<JokeState>().joke;
 
-    if (joke == null) return const Center(child: Text("Loading..."));
+    if (joke == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
