@@ -39,6 +39,11 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Chuck Norris Jokes',
       theme: ThemeData(
+        chipTheme: ChipThemeData.fromDefaults(
+          primaryColor: Colors.blue,
+          secondaryColor: Colors.blue,
+          labelStyle: const TextStyle(),
+        ),
         primarySwatch: Colors.blue,
       ),
       home: const MainPage(),
