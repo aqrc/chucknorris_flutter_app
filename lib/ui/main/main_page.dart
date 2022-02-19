@@ -11,10 +11,12 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
+          color: Colors.greenAccent,
           padding: const EdgeInsets.all(10),
           child: const JokeCard(),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: const BadgedFab(),
     );
   }

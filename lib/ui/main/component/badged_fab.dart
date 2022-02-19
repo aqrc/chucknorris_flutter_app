@@ -24,6 +24,9 @@ class BadgedFab extends StatelessWidget {
       position: BadgePosition.topEnd(top: -5, end: -5),
       badgeContent: Text(badgeContent),
       child: FloatingActionButton(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+        ),
         onPressed: () => showModalBottomSheet(
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(

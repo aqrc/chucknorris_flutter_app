@@ -21,8 +21,9 @@ class JokeCard extends StatelessWidget {
       onTap: () => context.read<JokeState>().updateJoke(),
       child: Card(
         shape: const RoundedRectangleBorder(
-            side: BorderSide(color: Colors.black, width: 3),
-            borderRadius: BorderRadius.all(Radius.circular(15))),
+          side: BorderSide(color: Colors.black, width: 3),
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+        ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Column(
@@ -37,6 +38,7 @@ class JokeCard extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(height: 40,)
             ],
           ),
         ),
