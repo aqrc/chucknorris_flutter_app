@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'component/badged_fab.dart';
-import 'component/joke_card.dart';
+import 'component/breaking_news_card_animation.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class MainPage extends StatelessWidget {
         child: Container(
           color: Colors.greenAccent,
           padding: const EdgeInsets.all(10),
-          child: const JokeCard(),
+          child: const BreakingNewsCardAnimation(),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

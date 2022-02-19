@@ -6,7 +6,10 @@ import '../state/joke_state.dart';
 import 'top_row.dart';
 
 class JokeCard extends StatelessWidget {
-  const JokeCard({
+  final AnimationController _controller;
+
+  const JokeCard(
+    this._controller, {
     Key? key,
   }) : super(key: key);
 
@@ -18,7 +21,11 @@ class JokeCard extends StatelessWidget {
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: () => context.read<JokeState>().updateJoke(),
+      onTap: () async {
+        await _controller.reverse(from: 1);
+        await context.read<JokeState>().updateJoke();
+        await _controller.forward(from: 0);
+      },
       child: Card(
         shape: const RoundedRectangleBorder(
           side: BorderSide(color: Colors.black, width: 3),
@@ -38,7 +45,7 @@ class JokeCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 40,)
+              const SizedBox(height: 40)
             ],
           ),
         ),

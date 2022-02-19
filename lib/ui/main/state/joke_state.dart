@@ -16,12 +16,10 @@ class JokeState extends ChangeNotifier {
 
   Joke? get joke => _joke;
 
-  void updateJoke() {
+  Future<void> updateJoke() async {
     var selectedCategories = _categories.getSelectedCategories();
 
-    _chuckNorrisClient
-        .getRandomJoke(selectedCategories)
-        .then((joke) => _joke = joke)
-        .then((_) => notifyListeners());
+    _joke = await _chuckNorrisClient.getRandomJoke(selectedCategories);
+    notifyListeners();
   }
 }
