@@ -1,9 +1,7 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'component/badged_fab.dart';
-import 'main_wm.dart';
+import 'component/joke_card.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -14,16 +12,7 @@ class MainPage extends StatelessWidget {
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(10),
-          child: GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: () => context.read<MainWidgetModel>().updateJoke(),
-            child: Center(
-              child: AutoSizeText(
-                context.watch<MainWidgetModel>().joke?.value ?? "Loading...",
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ),
-          ),
+          child: const JokeCard(),
         ),
       ),
       floatingActionButton: const BadgedFab(),
