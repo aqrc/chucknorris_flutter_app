@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../network/chucknorris_client.dart';
 
-class CategoriesWidgetModel extends ChangeNotifier {
+class CategoriesState extends ChangeNotifier {
   final ChuckNorrisClient _chuckNorrisClient;
 
-  CategoriesWidgetModel(this._chuckNorrisClient) {
+  CategoriesState(this._chuckNorrisClient) {
     _initCategories();
   }
 

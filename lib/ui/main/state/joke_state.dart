@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../network/chucknorris_client.dart';
-import '../../network/model/joke.dart';
-import 'component/categories_wm.dart';
+import '../../../network/chucknorris_client.dart';
+import '../../../network/model/joke.dart';
+import 'categories_state.dart';
 
-class MainWidgetModel extends ChangeNotifier {
+class JokeState extends ChangeNotifier {
   final ChuckNorrisClient _chuckNorrisClient;
-  final CategoriesWidgetModel _categories;
+  final CategoriesState _categories;
 
-  MainWidgetModel(this._chuckNorrisClient, this._categories) {
+  JokeState(this._chuckNorrisClient, this._categories) {
     updateJoke();
   }
 

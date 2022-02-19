@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'bottom_sheet_container.dart';
-import 'categories_wm.dart';
+import '../state/categories_state.dart';
 
 class BadgedFab extends StatelessWidget {
   const BadgedFab({
@@ -13,7 +13,7 @@ class BadgedFab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var selectedCategoriesCount =
-        context.watch<CategoriesWidgetModel>().selectedCategoriesCount;
+        context.watch<CategoriesState>().selectedCategoriesCount;
 
     var badgeContent = selectedCategoriesCount == 0
         ? "All"
